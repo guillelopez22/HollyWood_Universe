@@ -83,7 +83,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu4.setText("View");
 
-        jMenuItem1.setText("Relaciones Hollywoodenses");
+        jMenuItem1.setText("HollyWood Universe");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
