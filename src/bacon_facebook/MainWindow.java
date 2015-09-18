@@ -68,7 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem2.setText("Add");
         jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setText("Modificar");
+        jMenuItem3.setText("Edit");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -76,7 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Eliminar");
+        jMenuItem4.setText("Delete");
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -91,7 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem1);
 
-        jMenuItem5.setText("Historial");
+        jMenuItem5.setText("History");
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
