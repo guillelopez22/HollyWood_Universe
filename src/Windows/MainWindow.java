@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bacon_facebook;
+package Windows;
+import Classes.Relacion;
+import Classes.Pelicula;
+import Classes.Actor;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 /**
  *
@@ -22,9 +26,14 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        ArrayList<Actor> actores = new ArrayList();
+        ArrayList<Pelicula> peliculas = new ArrayList();
         Actor Kevin_Bacon = new Actor("Kevin Norwood Bacon", 57, "Estadounidense");
+        actores.add(Kevin_Bacon);
         Pelicula p1 = new Pelicula("National Lampoon's Animal House", 1978, "Universal Pictures");
         Pelicula p2= new Pelicula("Friday the 13th", 1980, "Sean S. Cunningham Films");
+        peliculas.add(p1);
+        peliculas.add(p2);
         Kevin_Bacon.setPeliculas(p1);
         Kevin_Bacon.setPeliculas(p2);
         grafo.addVertex(Kevin_Bacon);
