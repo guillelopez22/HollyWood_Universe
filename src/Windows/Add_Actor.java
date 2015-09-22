@@ -5,6 +5,12 @@
  */
 package Windows;
 
+import Classes.Actor;
+import Classes.Pelicula;
+import static Windows.MainWindow.actores;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Memo
@@ -52,8 +58,18 @@ public class Add_Actor extends javax.swing.JFrame {
         jLabel5.setText("Peliculas: ");
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Done");
+        jButton2.setText("Ok");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,6 +133,36 @@ public class Add_Actor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        pelis = new ArrayList();
+        Pelicula p = new Pelicula();
+        if (cb_peliculas.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Escoja una de las opciones..");
+        }else{
+        p = (Pelicula) cb_peliculas.getSelectedItem();
+        pelis.add(p);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        actor = new Actor();
+        actor.setNombre_completo(tf_nombrecompleto.getText());
+        tf_nombrecompleto.setText("");
+        actor.setEdad((int) sp_edad.getValue());
+        sp_edad.setValue(0);
+        actor.setNacionalidad(tf_nacionalidad.getText());
+        cb_peliculas.setSelectedIndex(0);
+        tf_nacionalidad.setText("");        
+        actores.add(actor);
+        for (int i = 0; i < pelis.size(); i++) {
+            actor.setPeliculas(pelis.get(i));
+        }
+
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -153,7 +199,7 @@ public class Add_Actor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cb_peliculas;
+    public static javax.swing.JComboBox cb_peliculas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -165,4 +211,6 @@ public class Add_Actor extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nacionalidad;
     private javax.swing.JTextField tf_nombrecompleto;
     // End of variables declaration//GEN-END:variables
+    Actor actor;
+    ArrayList<Pelicula> pelis;
 }

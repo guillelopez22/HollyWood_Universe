@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package Windows;
+
 import Classes.Relacion;
 import Classes.Pelicula;
 import Classes.Actor;
+import static Windows.Add_Relationship.cb_actor1;
+import static Windows.Add_Relationship.cb_actor2;
+import static Windows.Add_Movie.cb_año;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
@@ -15,6 +19,11 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.DefaultComboBoxModel;
+import static Windows.Add_Actor.cb_peliculas;
+import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
+
 /**
  *
  * @author Memo
@@ -26,18 +35,17 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
-        ArrayList<Actor> actores = new ArrayList();
-        ArrayList<Pelicula> peliculas = new ArrayList();
+
         Actor Kevin_Bacon = new Actor("Kevin Norwood Bacon", 57, "Estadounidense");
         actores.add(Kevin_Bacon);
         Pelicula p1 = new Pelicula("National Lampoon's Animal House", 1978, "Universal Pictures");
-        Pelicula p2= new Pelicula("Friday the 13th", 1980, "Sean S. Cunningham Films");
+        Pelicula p2 = new Pelicula("Friday the 13th", 1980, "Sean S. Cunningham Films");
         peliculas.add(p1);
         peliculas.add(p2);
         Kevin_Bacon.setPeliculas(p1);
         Kevin_Bacon.setPeliculas(p2);
         grafo.addVertex(Kevin_Bacon);
-        
+
     }
 
     /**
@@ -54,6 +62,9 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -74,8 +85,33 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
 
-        jMenuItem2.setText("Add");
-        jMenu2.add(jMenuItem2);
+        jMenu5.setText("Add");
+
+        jMenuItem8.setText("Actor");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem8);
+
+        jMenuItem7.setText("Movie");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem7);
+
+        jMenuItem2.setText("Relacion");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem2);
+
+        jMenu2.add(jMenu5);
 
         jMenuItem3.setText("Edit");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +159,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        for (int i = 0; i < relaciones.size(); i++) {
+            grafo.addEdge(relaciones.get(i), relaciones.get(i).getActor(), relaciones.get(i).getActor2(), EdgeType.UNDIRECTED);
+        }
+        
         Layout<Integer, String> layout = new CircleLayout(grafo);
         layout.setSize(new Dimension(550, 550));
         BasicVisualizationServer<Integer, String> visualization = new BasicVisualizationServer<Integer, String>(layout);
@@ -141,6 +181,52 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+
+        Add_Movie movies = new Add_Movie();
+
+        movies.pack();
+        movies.setVisible(true);
+        movies.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement("----");
+        for (int i = 1888; i <= 2015; i++) {
+            model.addElement(i);
+        }
+        cb_año.setModel(model);
+
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        Add_Actor actors = new Add_Actor();
+        actors.pack();
+        actors.setVisible(true);
+        actors.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement("----Seleccione una Pelicula ------");
+        for (int i = 0; i < peliculas.size(); i++) {
+            model.addElement(peliculas.get(i));
+        }
+        cb_peliculas.setModel(model);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        Add_Relationship relacion = new Add_Relationship();
+        relacion.pack();
+        relacion.setVisible(true);
+        relacion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (int i = 0; i < actores.size(); i++) {
+            System.out.println(actores.get(i));
+            model.addElement(actores.get(i));
+        }
+        cb_actor1.setModel(model);
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +268,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -189,7 +276,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
-DirectedSparseMultigraph grafo = new DirectedSparseMultigraph<Actor, Relacion>();
+UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Actor, Relacion>();
+   public static ArrayList<Actor> actores = new ArrayList();
+   public static ArrayList<Pelicula> peliculas = new ArrayList();
+   public static ArrayList<Relacion> relaciones = new ArrayList();
 
 }

@@ -11,11 +11,22 @@ package Classes;
  */
 public class Relacion {
     private int num_relacion;
+    Actor actor, actor2;
 
-    public Relacion(int num_relacion) {
+    public Relacion(int num_relacion, Actor actor, Actor actor2) {
         this.num_relacion = num_relacion;
+        this.actor = actor;
+        this.actor2 = actor2;
     }
-    
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public Actor getActor2() {
+        return actor2;
+    }
+        
     public String Relationship(){
        String relacion;
         if (num_relacion == 1) {
@@ -31,4 +42,10 @@ public class Relacion {
         }
         return relacion;
     }
+
+    @Override
+    public String toString() {
+        return ""+num_relacion;
+    }
+
 }

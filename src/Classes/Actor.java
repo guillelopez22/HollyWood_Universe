@@ -12,6 +12,10 @@ import java.util.ArrayList;
  * @author Memo
  */
 public class Actor {
+
+    public Actor() {
+    }
+    
     private String nombre_completo;
     private int edad;
     private String nacionalidad;

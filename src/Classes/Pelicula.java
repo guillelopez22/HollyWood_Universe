@@ -14,6 +14,10 @@ public class Pelicula {
     private int año_exhibicion;
     private String studio;
 
+    public Pelicula() {
+    }
+    
+
     public Pelicula(String titulo, int año_exhibicion, String studio) {
         this.titulo = titulo;
         this.año_exhibicion = año_exhibicion;
@@ -46,7 +50,7 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula: " + titulo ;
+        return titulo ;
     }
     
     
