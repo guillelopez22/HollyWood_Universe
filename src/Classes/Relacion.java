@@ -45,7 +45,7 @@ public class Relacion {
 
     @Override
     public String toString() {
-        return ""+num_relacion;
+        return Relationship();
     }
 
 }
